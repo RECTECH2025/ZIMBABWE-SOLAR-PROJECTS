@@ -3,416 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zimbabwe Solar Park Projects</title>
+    <title>Zimbabwe Solar Park Projects Infographic</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f4f8; /* Light gray background */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Align to top for scrollability */
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 2.5rem 1rem; /* Increased padding top/bottom, fixed horizontal */
             box-sizing: border-box;
         }
-        .presentation-container {
+        .infographic-container {
             background-color: #ffffff;
-            border-radius: 1rem; /* Rounded corners */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 1.5rem; /* More rounded corners for infographic feel */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow */
             width: 100%;
-            max-width: 960px; /* Max width for presentation */
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; /* Hide overflow for slide transitions */
-            position: relative;
-        }
-        .slide {
-            flex-shrink: 0;
-            width: 100%;
-            height: 100%;
-            padding: 2.5rem; /* Increased padding for content */
+            max-width: 1000px; /* Wider for infographic */
+            padding: 3rem; /* Generous padding */
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            visibility: hidden;
-            text-align: left; /* Align text to left */
+            gap: 2.5rem; /* Space between sections */
         }
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-            position: relative; /* Bring active slide into document flow */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
-        .slide h1 {
-            font-size: 2.5rem; /* Larger heading */
-            font-weight: 700;
+        .section-header h1 {
+            font-size: 3rem; /* Larger main title */
+            font-weight: 800; /* Extra bold */
             color: #1a202c; /* Dark text */
-            margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
-        .slide h2 {
-            font-size: 1.875rem; /* Sub-heading */
-            font-weight: 600;
-            color: #2d3748; /* Slightly lighter dark text */
-            margin-bottom: 1rem;
+        .section-header h2 {
+            font-size: 2rem; /* Larger sub-heading */
+            font-weight: 700;
+            color: #4c51bf; /* Indigo */
+            margin-top: 0.5rem;
         }
-        .slide h3 {
-            font-size: 1.5rem; /* Section heading */
-            font-weight: 600;
+        .section-header p {
+            font-size: 1.25rem;
             color: #4a5568;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .project-card {
+            background-color: #f8fafc; /* Very light blue-gray for cards */
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0; /* Light border */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        .project-card h3 {
+            font-size: 2rem; /* Project title */
+            font-weight: 700;
+            color: #312e81; /* Darker indigo */
             margin-bottom: 0.75rem;
+            text-align: center;
         }
-        .slide p, .slide ul {
-            font-size: 1.125rem; /* Readable font size */
+        .project-card ul {
+            list-style: none; /* No bullets */
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for list items */
+            gap: 0.75rem;
+        }
+        .project-card ul li {
+            font-size: 1.05rem;
             color: #4a5568;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            background-color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #edf2f7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .slide ul {
-            list-style: disc;
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .slide ul li {
-            margin-bottom: 0.5rem;
-        }
-        .slide strong {
+        .project-card ul li strong {
             color: #2d3748;
         }
-        .navigation-buttons {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-        }
-        .nav-button {
-            background-color: #4c51bf; /* Indigo */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+        .project-card .ask-box {
+            background-color: #e0e7ff; /* Light purple for ask */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.15rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: none;
+            color: #4c51bf;
+            border: 1px dashed #a7b5ed;
         }
-        .nav-button:hover {
-            background-color: #5a62d8; /* Lighter indigo on hover */
-            transform: translateY(-2px);
+        .summary-box {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
         }
-        .nav-button:disabled {
-            background-color: #a0aec0; /* Gray when disabled */
-            cursor: not-allowed;
-            box-shadow: none;
+        .summary-box h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #312e81;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .summary-item {
+            background-color: #f0f9ff; /* Very light blue */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #bfdbfe;
+        }
+        .summary-item .icon {
+            font-size: 2.5rem;
+            color: #2563eb; /* Blue icon */
+            margin-bottom: 0.75rem;
+        }
+        .summary-item h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3a8a; /* Darker blue */
+            margin-bottom: 0.5rem;
+        }
+        .summary-item p {
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+        .call-to-action {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background-color: #4c51bf; /* Indigo background */
+            color: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .call-to-action p {
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .call-to-action strong {
+            font-size: 1.6rem;
+            font-weight: 800;
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .presentation-container {
-                min-height: 500px;
-                padding: 10px;
-            }
-            .slide {
+            .infographic-container {
                 padding: 1.5rem;
+                gap: 1.5rem;
             }
-            .slide h1 {
-                font-size: 2rem;
+            .section-header h1 {
+                font-size: 2.5rem;
             }
-            .slide h2 {
+            .section-header h2 {
                 font-size: 1.5rem;
             }
-            .slide h3 {
-                font-size: 1.25rem;
-            }
-            .slide p, .slide ul {
+            .section-header p {
                 font-size: 1rem;
             }
-            .navigation-buttons {
-                flex-direction: row;
-                gap: 0.75rem;
-                bottom: 1rem;
+            .project-card {
+                padding: 1.5rem;
             }
-            .nav-button {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
+            .project-card h3 {
+                font-size: 1.75rem;
+            }
+            .project-card ul {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+            .project-card ul li {
+                font-size: 0.95rem;
+            }
+            .summary-box {
+                padding: 1.5rem;
+            }
+            .summary-box h3 {
+                font-size: 1.75rem;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .summary-item h4 {
+                font-size: 1.1rem;
+            }
+            .summary-item p {
+                font-size: 1rem;
+            }
+            .call-to-action {
+                padding: 1.5rem;
+            }
+            .call-to-action p {
+                font-size: 1.1rem;
+            }
+            .call-to-action strong {
+                font-size: 1.3rem;
             }
         }
 
         @media (max-width: 480px) {
-            .presentation-container {
-                min-height: 450px;
-                padding: 5px;
+            body {
+                padding: 1rem 0.5rem;
             }
-            .slide {
+            .infographic-container {
                 padding: 1rem;
+                border-radius: 1rem;
             }
-            .slide h1 {
-                font-size: 1.75rem;
+            .section-header h1 {
+                font-size: 2rem;
             }
-            .slide h2 {
-                font-size: 1.3rem;
+            .section-header h2 {
+                font-size: 1.2rem;
             }
-            .slide h3 {
-                font-size: 1.1rem;
-            }
-            .slide p, .slide ul {
+            .section-header p {
                 font-size: 0.9rem;
             }
-            .navigation-buttons {
-                bottom: 0.75rem;
+            .project-card {
+                padding: 1rem;
             }
-            .nav-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
+            .project-card h3 {
+                font-size: 1.5rem;
+            }
+            .project-card ul li {
+                font-size: 0.9rem;
+                padding: 0.6rem 0.8rem;
+            }
+            .summary-box h3 {
+                font-size: 1.5rem;
+            }
+            .summary-item .icon {
+                font-size: 2rem;
+            }
+            .summary-item h4 {
+                font-size: 1rem;
+            }
+            .summary-item p {
+                font-size: 0.9rem;
+            }
+            .call-to-action p {
+                font-size: 1rem;
+            }
+            .call-to-action strong {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <!-- Slide 1: Introduction -->
-        <div class="slide active" id="slide-1">
-            <h1 class="text-indigo-800">Zimbabwe Solar Park Projects</h1>
-            <h2 class="text-indigo-700">Addressing the National Energy Deficit</h2>
-            <p>Zimbabwe faces a significant power deficit, with an installed capacity of 2,100MW but generating only 1,200MW to 1,300MW, resulting in an **800MW deficit**.</p>
-            <p>To tackle this challenge, local investors have established utility-scale Photovoltaic (PV) solar firms, bringing much-needed renewable energy to the national grid. This presentation summarizes three key projects driving this initiative.</p>
-        </div>
+    <div class="infographic-container">
+        <!-- Main Header -->
+        <header class="section-header">
+            <h1 class="text-indigo-800">Zimbabwe Solar Power Initiative</h1>
+            <h2 class="text-indigo-700">Strategic Investment Opportunities</h2>
+            <p>Addressing Zimbabwe's significant energy deficit through a portfolio of utility-scale Photovoltaic (PV) solar projects. These initiatives aim to deliver reliable, renewable energy to the national grid and foster sustainable economic growth.</p>
+        </header>
 
-        <!-- Slide 2: MIDLAND Solar Park Project IV -->
-        <div class="slide" id="slide-2">
-            <h1 class="text-indigo-800">MIDLAND Solar Park Project IV</h1>
-            <h2 class="text-indigo-700">Utility PV Solar Park</h2>
+        <!-- Project Overviews Section -->
+        <section class="mb-8">
+            <h2 class="text-center text-4xl font-extrabold text-gray-800 mb-8">Project Overviews</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
-                    <h3>Project Snapshot:</h3>
+                <!-- MIDLAND Project Card -->
+                <div class="project-card">
+                    <h3 class="text-indigo-800">MIDLAND Solar Park Project IV</h3>
                     <ul>
-                        <li><strong>Capacity:</strong> 100MW (2 Phases of 50MW)</li>
-                        <li><strong>Budget:</strong> US$60M</li>
-                        <li><strong>Start Date:</strong> Q4 2022</li>
-                        <li><strong>Commercial Operation:</strong> Q1 2023</li>
-                        <li><strong>Technology:</strong> Thin Film PV Modules</li>
-                        <li><strong>Acreage:</strong> 930 Acres (380 Ha)</li>
-                        <li><strong>PPA Tariff:</strong> US$0.0893/kWh</li>
+                        <li><span class="text-indigo-600">⚡</span> <strong>Capacity:</strong> 100MW (2x 50MW Phases)</li>
+                        <li><span class="text-indigo-600">💰</span> <strong>Budget:</strong> US$60M</li>
+                        <li><span class="text-indigo-600">📅</span> <strong>Commercial Op.:</strong> To be determined depending on financial closure</li>
+                        <li><span class="text-indigo-600">🛰️</span> <strong>Tech:</strong> Thin Film PV</li>
+                        <li><span class="text-indigo-600">🏞️</span> <strong>Acreage:</strong> 930 Acres (380 Ha)</li>
+                        <li><span class="text-indigo-600">💡</span> <strong>PPA Tariff:</strong> US$0.0893/kWh</li>
                     </ul>
+                    <div class="ask-box">
+                        Investment Ask: <strong>US$60M</strong> for 80% consideration. Promoter retains 20% + US$0.75M Dev Fee Refund.
+                    </div>
                 </div>
-                <div>
-                    <h3>Key Guarantees & Approvals:</h3>
+
+                <!-- ALASKA Project Card -->
+                <div class="project-card">
+                    <h3 class="text-indigo-800">ALASKA Solar Park Project</h3>
                     <ul>
-                        <li>25-Year 50MW PPA Issued</li>
-                        <li>Government Support & Offtake Guarantee</li>
-                        <li>Tariff Linked to USA CPI</li>
-                        <li>ZETDC Project Approval</li>
-                        <li>Experienced Operating Team</li>
+                        <li><span class="text-indigo-600">⚡</span> <strong>Capacity:</strong> 100MW (50MW Phase 1)</li>
+                        <li><span class="text-indigo-600">💰</span> <strong>Budget:</strong> US$62M</li>
+                        <li><span class="text-indigo-600">📅</span> <strong>Commercial Op.:</strong> To be determined depending on financial closure</li>
+                        <li><span class="text-indigo-600">🛰️</span> <strong>Tech:</strong> Thin Film PV</li>
+                        <li><span class="text-indigo-600">🏞️</span> <strong>Acreage:</strong> 500 Acres (200 Ha)</li>
+                        <li><span class="text-indigo-600">💡</span> <strong>PPA Tariff:</strong> US$0.0899/kWh</li>
+                        <li><span class="text-indigo-600">📊</span> <strong>Forecast:</strong> 190GWh p.a. (30% PLF)</li>
                     </ul>
-                    <h3>Investment Ask:</h3>
-                    <p><strong>US$60M</strong> for an 80% consideration. Project Promoter retains 20% & US$0.75M Development Fee Refund.</p>
+                    <div class="ask-box">
+                        Investment Ask: <strong>US$62M</strong> @ 6.5% p.a. interest, 10-Year Term, 1-Year Moratorium. Open to Debt/Equity.
+                    </div>
+                </div>
+
+                <!-- TRIANGLE Project Card -->
+                <div class="project-card">
+                    <h3 class="text-indigo-800">TRIANGLE Solar Park Project III</h3>
+                    <ul>
+                        <li><span class="text-indigo-600">⚡</span> <strong>Capacity:</strong> 45MW (Masvingo)</li>
+                        <li><span class="text-indigo-600">💰</span> <strong>Budget:</strong> US$60M</li>
+                        <li><span class="text-indigo-600">📅</span> <strong>Commercial Op.:</strong> To be determined depending on financial closure</li>
+                        <li><span class="text-indigo-600">🛰️</span> <strong>Tech:</strong> Thin Film PV</li>
+                        <li><span class="text-indigo-600">🏞️</span> <strong>Acreage:</strong> 241 Ha (595 Acres)</li>
+                        <li><span class="text-indigo-600">💡</span> <strong>PPA Tariff:</strong> US$0.0893/kWh</li>
+                    </ul>
+                    <div class="ask-box">
+                        Investment Ask: <strong>US$60M</strong> @ 3% p.a. interest, 10-Year Term, 1-Year Moratorium. Open to Debt/Equity.
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Slide 3: ALASKA Solar Park Project -->
-        <div class="slide" id="slide-3">
-            <h1 class="text-indigo-800">ALASKA Solar Park Project</h1>
-            <h2 class="text-indigo-700">Utility PV Solar Park</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
-                    <h3>Project Snapshot:</h3>
-                    <ul>
-                        <li><strong>Capacity:</strong> 100MW (50MW Phase 1)</li>
-                        <li><strong>Budget:</strong> US$62M</li>
-                        <li><strong>Start Date:</strong> Q3 2022</li>
-                        <li><strong>PPA License Tenure:</strong> 24 Yrs (Incl. 4 Yrs Set-Up)</li>
-                        <li><strong>Expiry Date:</strong> March 13, 2044</li>
-                        <li><strong>Technology:</strong> Thin Film PV Modules</li>
-                        <li><strong>Acreage:</strong> 500 Acres (200 Ha)</li>
-                        <li><strong>PPA Tariff:</strong> US$0.0899/kWh</li>
-                        <li><strong>Generation Forecast:</strong> 190GWh per annum (30% PLF)</li>
-                    </ul>
+        <!-- Overall Investment Summary & Timelines Section -->
+        <section class="summary-box">
+            <h3 class="text-indigo-800">Overall Investment & Project Timelines</h3>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="icon">💲</div>
+                    <h4>Total Investment (Project Budgets)</h4>
+                    <p>Combined budgets for all three projects: <strong>US$182 Million</strong></p>
                 </div>
-                <div>
-                    <h3>Key Guarantees & Approvals:</h3>
-                    <ul>
-                        <li>Government MoU Support</li>
-                        <li>20-Year 50MW PPA Issued</li>
-                        <li>Regulator Approved Minimum Offtake</li>
-                        <li>Tariff Linked to USA CPI</li>
-                        <li>ZETDC Project Approval</li>
-                        <li>Experienced Operating Team</li>
-                        <li>Economies of Scale Benefits</li>
-                    </ul>
-                    <h3>Investment Ask:</h3>
-                    <p><strong>US$62M</strong> @ 6.5% p.a. Interest, 10-Year Term, 1-Year Moratorium. Open to Debt and/or Equity offers.</p>
+                <div class="summary-item">
+                    <div class="icon">💼</div>
+                    <h4>Initial Investment for 100% Rights</h4>
+                    <p>Required investment of US$70,000 per MW across 245MW: <strong>US$17.15 Million</strong></p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">🗓️</div>
+                    <h4>Draw Schedule</h4>
+                    <p>To be determined based on transaction finalization.</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">⏱️</div>
+                    <h4>Total Time to Commercial Operation (COD)</h4>
+                    <p>Estimated <strong>15 to 18 months</strong> from transaction finalization to reach COD.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Slide 4: TRIANGLE Solar Park Project III -->
-        <div class="slide" id="slide-4">
-            <h1 class="text-indigo-800">TRIANGLE Solar Park Project III</h1>
-            <h2 class="text-indigo-700">Utility PV Solar Park</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
-                    <h3>Project Snapshot:</h3>
-                    <ul>
-                        <li><strong>Capacity:</strong> 45MW (in Masvingo)</li>
-                        <li><strong>Budget:</strong> US$60M</li>
-                        <li><strong>Financial Close:</strong> Dec 31, 2021</li>
-                        <li><strong>Build Start:</strong> Aug 2022</li>
-                        <li><strong>Commercial Operation:</strong> Oct 31, 2023</li>
-                        <li><strong>Technology:</strong> Thin Film PV Modules</li>
-                        <li><strong>Project Area:</strong> 241 Ha (595 Acres)</li>
-                        <li><strong>PPA Tariff:</strong> US$0.0893/kWh</li>
-                        <li><strong>PPA License Tenure:</strong> 20 Yrs (Excl. Set-Up)</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Key Guarantees & Approvals:</h3>
-                    <ul>
-                        <li>20-Year 45MW PPA Issued</li>
-                        <li>Government Commitment to Support</li>
-                        <li>Regulator Approved Minimum Offtake</li>
-                        <li>Tariff Linked to USA CPI</li>
-                        <li>ZETDC Project Approval</li>
-                        <li>Experienced Operating Team</li>
-                        <li>Promoter Open to Investment SPV</li>
-                    </ul>
-                    <h3>Investment Ask:</h3>
-                    <p><strong>US$60M</strong> @ 3% p.a. Interest, 10-Year Term, 1-Year Moratorium. Open to Debt and/or Equity offers.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- New Slide 5: Investment Summary -->
-        <div class="slide" id="slide-5">
-            <h1 class="text-indigo-800">Investment Summary Across Projects</h1>
-            <h2 class="text-indigo-700">Key Investment Asks and Terms</h2>
-
-            <div class="w-full mt-4">
-                <div class="mb-6 p-4 border border-indigo-200 rounded-lg bg-indigo-50 shadow-sm">
-                    <h3 class="text-indigo-700">MIDLAND Solar Park Project IV:</h3>
-                    <p><strong>US$60M</strong> for an 80% consideration. The Project Promoter retains 20% equity and a US$0.75M Development Fee Refund.</p>
-                </div>
-                <div class="mb-6 p-4 border border-indigo-200 rounded-lg bg-indigo-50 shadow-sm">
-                    <h3 class="text-indigo-700">ALASKA Solar Park Project:</h3>
-                    <p>Seeking <strong>US$62M</strong> at 6.5% p.a. interest, with a 10-year term and a 1-year moratorium. Open to both Debt and/or Equity offers.</p>
-                </div>
-                <div class="p-4 border border-indigo-200 rounded-lg bg-indigo-50 shadow-sm">
-                    <h3 class="text-indigo-700">TRIANGLE Solar Park Project III:</h3>
-                    <p>Seeking <strong>US$60M</strong> at 3% p.a. interest, with a 10-year term and a 1-year moratorium. Open to both Debt and/or Equity offers.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: Comparative Summary -->
-        <div class="slide" id="slide-6">
-            <h1 class="text-indigo-800">Comparative Summary & Call to Action</h1>
-            <h2 class="text-indigo-700">Driving Renewable Energy Growth in Zimbabwe</h2>
-
-            <div class="overflow-x-auto w-full mt-4">
-                <table class="min-w-full bg-white rounded-lg shadow-md">
-                    <thead>
-                        <tr class="bg-indigo-600 text-white">
-                            <th class="py-2 px-4 text-left rounded-tl-lg">Feature</th>
-                            <th class="py-2 px-4 text-left">MIDLAND IV</th>
-                            <th class="py-2 px-4 text-left">ALASKA</th>
-                            <th class="py-2 px-4 text-left rounded-tr-lg">TRIANGLE III</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-2 px-4 font-semibold">Capacity (MW)</td>
-                            <td class="py-2 px-4">100</td>
-                            <td class="py-2 px-4">100 (50 Phase 1)</td>
-                            <td class="py-2 px-4">45</td>
-                        </tr>
-                        <tr class="bg-gray-50 border-b border-gray-200">
-                            <td class="py-2 px-4 font-semibold">Budget (US$)</td>
-                            <td class="py-2 px-4">$60M</td>
-                            <td class="py-2 px-4">$62M</td>
-                            <td class="py-2 px-4">$60M</td>
-                        </tr>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-2 px-4 font-semibold">PPA Tariff (US$/kWh)</td>
-                            <td class="py-2 px-4">$0.0893</td>
-                            <td class="py-2 px-4">$0.0899</td>
-                            <td class="py-2 px-4">$0.0893</td>
-                        </tr>
-                        <tr class="bg-gray-50">
-                            <td class="py-2 px-4 font-semibold">Investment Ask</td>
-                            <td class="py-2 px-4">$60M (80% consid.)</td>
-                            <td class="py-2 px-4">$62M (6.5% int.)</td>
-                            <td class="py-2 px-4">$60M (3% int.)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p class="mt-8 text-center">These projects represent a crucial step towards alleviating Zimbabwe's energy deficit and fostering a sustainable future. Each offers a compelling investment opportunity with strong government support and established operational frameworks.</p>
-            <p class="text-center">We invite you to consider partnering with us to power Zimbabwe's future.</p>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="navigation-buttons">
-            <button id="prevBtn" class="nav-button">Previous</button>
-            <button id="nextBtn" class="nav-button">Next</button>
-        </div>
+        <!-- Call to Action -->
+        <section class="call-to-action">
+            <p>These projects represent a crucial step towards alleviating Zimbabwe's energy deficit and fostering a sustainable future. Each offers a compelling investment opportunity with strong government support and established operational frameworks.</p>
+            <p>We invite you to consider partnering with us to power Zimbabwe's future. <strong>Connect with us today!</strong></p>
+        </section>
     </div>
-
-    <script>
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        let currentSlide = 0;
-
-        // Function to show a specific slide
-        function showSlide(index) {
-            // Deactivate all slides
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-            });
-
-            // Activate the current slide
-            slides[index].classList.add('active');
-            currentSlide = index;
-
-            // Update button states
-            prevBtn.disabled = currentSlide === 0;
-            nextBtn.disabled = currentSlide === slides.length - 1;
-        }
-
-        // Event listeners for navigation buttons
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < slides.length - 1) {
-                showSlide(currentSlide + 1);
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                showSlide(currentSlide - 1);
-            }
-        });
-
-        // Initialize the presentation on window load
-        window.onload = () => {
-            showSlide(0); // Show the first slide
-        };
-    </script>
 </body>
 </html>
-
