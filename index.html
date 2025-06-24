@@ -58,11 +58,12 @@
             margin-right: auto;
         }
 
-        /* Project Card Styles (retained from professional pitch) */
+        /* Project Card Styles (adjusted for single column) */
         .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid for projects */
-            gap: 2rem; /* Space between project cards */
+            /* Removed grid properties to allow stacking */
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem; /* Space between project cards when stacked */
         }
         .project-card {
             background-color: #f8fafc;
@@ -74,7 +75,8 @@
             flex-direction: column;
             gap: 1.75rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%; /* Ensure cards are same height in a row */
+            width: 100%; /* Take full width */
+            /* Removed fixed height as cards will stack independently */
         }
         .project-card:hover {
             transform: translateY(-8px);
@@ -90,8 +92,8 @@
         .project-card ul {
             list-style: none;
             padding-left: 0;
-            display: flex; /* Changed to flex for vertical list items */
-            flex-direction: column;
+            display: grid; /* Use grid within the card for list items */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Maintain 2 columns for details on larger screens */
             gap: 1rem; /* Space between list items */
             flex-grow: 1; /* Allows list to take up available space */
         }
@@ -140,7 +142,7 @@
         }
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly adjusted for 4 items */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.75rem;
         }
         .summary-item {
@@ -201,7 +203,7 @@
                 font-size: 1.8rem;
             }
             .project-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 2rem;
             }
         }
 
@@ -228,6 +230,9 @@
             .project-card h3 {
                 font-size: 1.8rem;
             }
+            .project-card ul {
+                grid-template-columns: 1fr; /* Stack list items on small screens */
+            }
             .project-card ul li {
                 font-size: 1rem;
                 padding: 0.8rem 1rem;
@@ -243,7 +248,7 @@
                 font-size: 1.8rem;
             }
             .summary-grid {
-                grid-template-columns: 1fr; /* Single column on smaller screens */
+                grid-template-columns: 1fr;
             }
             .summary-item h4 {
                 font-size: 1.2rem;
@@ -413,6 +418,7 @@
                     <div class="icon">⏱️</div>
                     <h4>Time to Commercial Operation (COD)</h4>
                     <p>An estimated **15 to 18 months** from the point of transaction finalization to achieve Commercial Operation Date (COD).</p>
+                *</p>
                 </div>
             </div>
         </section>
